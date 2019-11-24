@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_country_picker/flutter_country_picker.dart';
 import 'country_page.dart';
 
-void main() => runApp(CountryHelper());
+void main() => runApp(App());
 
-class CountryHelper extends StatelessWidget {
+class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -12,12 +12,12 @@ class CountryHelper extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.red,
         ),
-        home: Countries(title: 'Country Info Helper') // TODO: localizar
+        home: MainPage(title: 'Country Info Helper') // TODO: localizar
         );
   }
 }
 
-class CountriesState extends State<Countries> {
+class MainPageState extends State<MainPage> {
   Country _selected;
 
   Widget _buildCountryPage() {
@@ -77,11 +77,11 @@ class CountriesState extends State<Countries> {
   }
 }
 
-class Countries extends StatefulWidget {
-  Countries({Key key, this.title}) : super(key: key);
+class MainPage extends StatefulWidget {
+  MainPage({Key key, this.title}) : super(key: key);
 
   final String title;
 
   @override
-  CountriesState createState() => CountriesState();
+  MainPageState createState() => MainPageState();
 }
