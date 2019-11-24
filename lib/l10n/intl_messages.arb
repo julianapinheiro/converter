@@ -1,0 +1,15 @@
+{
+  "@@last_modified": "2019-11-24T20:07:20.044848",
+  "title": "Country Info Helper",
+  "@title": {
+    "description": "App title",
+    "type": "text",
+    "placeholders": {}
+  },
+  "chooseCountry": "Choose country:",
+  "@chooseCountry": {
+    "description": "User should pick a country.",
+    "type": "text",
+    "placeholders": {}
+  }
+}

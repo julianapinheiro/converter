@@ -1,0 +1,9 @@
+{
+  "@@last_modified": "2019-11-24T19:45:52.557548",
+  "title": "Country Info Helper",
+  "@title": {
+    "description": "App title",
+    "type": "text",
+    "placeholders": {}
+  }
+}
