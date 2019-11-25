@@ -1,6 +1,8 @@
+import 'package:converter/localization/converter_localizations.dart';
 import 'package:country_pickers/country.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'network_helper.dart';
 
 class CountryInfoState extends State<CountryInfo> {
   DateTime now = DateTime.now();
@@ -27,7 +29,7 @@ class CountryInfoState extends State<CountryInfo> {
                     Padding(
                       padding: EdgeInsets.all(10.0),
                       child: Text(
-                        'Current time:', // TODO: localizar
+                        ConverterLocalizations.of(context).currentTime,
                         style: TextStyle(fontSize: 18.0),
                       ),
                     ),
@@ -49,7 +51,7 @@ class CountryInfoState extends State<CountryInfo> {
             Padding(
               padding: EdgeInsets.all(10.0),
               child: Text(
-                'Currency converter: ', // TODO: localizar
+                ConverterLocalizations.of(context).currencyConverter,
                 style: TextStyle(fontSize: 18.0),
               ),
             )
@@ -65,6 +67,10 @@ class CountryInfo extends StatefulWidget {
   CountryInfoState createState() => CountryInfoState();
 
   final Country country;
+  final String currency;
 
-  CountryInfo({Key key, @required this.country}) : super(key: key);
+  CountryInfo({Key key, @required this.country, @required this.currency}) {
+    print(currency);
+  }
+  // : super(key: key);
 }

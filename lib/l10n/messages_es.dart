@@ -1,5 +1,5 @@
 // DO NOT EDIT. This is code generated via package:intl/generate_localized.dart
-// This is a library that provides messages for a pt locale. All the
+// This is a library that provides messages for a es locale. All the
 // messages from the main program should be duplicated here with the same
 // function name.
 
@@ -17,13 +17,13 @@ final messages = new MessageLookup();
 typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 
 class MessageLookup extends MessageLookupByLibrary {
-  String get localeName => 'pt';
+  String get localeName => 'es';
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static _notInlinedMessages(_) => <String, Function> {
-    "chooseCountry" : MessageLookupByLibrary.simpleMessage("Selecione um país:"),
-    "currencyConverter" : MessageLookupByLibrary.simpleMessage("Conversor de moeda:"),
-    "currentTime" : MessageLookupByLibrary.simpleMessage("Hora atual:"),
-    "title" : MessageLookupByLibrary.simpleMessage("Testando 123")
+    "chooseCountry" : MessageLookupByLibrary.simpleMessage("Choose country:"),
+    "currencyConverter" : MessageLookupByLibrary.simpleMessage("Currency converter:"),
+    "currentTime" : MessageLookupByLibrary.simpleMessage("Current time:"),
+    "title" : MessageLookupByLibrary.simpleMessage("Country Info Helper")
   };
 }

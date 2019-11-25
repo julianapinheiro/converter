@@ -1,5 +1,5 @@
 {
-  "@@last_modified": "2019-11-24T20:07:20.044848",
+  "@@last_modified": "2019-11-24T21:04:50.145406",
   "title": "Country Info Helper",
   "@title": {
     "description": "App title",
@@ -9,6 +9,16 @@
   "chooseCountry": "Choose country:",
   "@chooseCountry": {
     "description": "User should pick a country.",
+    "type": "text",
+    "placeholders": {}
+  },
+  "currencyConverter": "Currency converter:",
+  "@currencyConverter": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "currentTime": "Current time:",
+  "@currentTime": {
     "type": "text",
     "placeholders": {}
   }

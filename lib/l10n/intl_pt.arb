@@ -1,14 +1,24 @@
 {
-  "@@last_modified": "2019-11-24T20:07:20.044848",
-  "title": "Country Info Helper",
+  "@@last_modified": "2019-11-24T21:04:50.145406",
+  "title": "Auxiliar de Informações do País",
   "@title": {
     "description": "App title",
     "type": "text",
     "placeholders": {}
   },
-  "chooseCountry": "Escolha um país:",
+  "chooseCountry": "Selecione um país:",
   "@chooseCountry": {
     "description": "User should pick a country.",
+    "type": "text",
+    "placeholders": {}
+  },
+  "currencyConverter": "Conversor de moeda:",
+  "@currencyConverter": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "currentTime": "Hora atual:",
+  "@currentTime": {
     "type": "text",
     "placeholders": {}
   }

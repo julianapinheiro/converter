@@ -21,6 +21,9 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static _notInlinedMessages(_) => <String, Function> {
+    "chooseCountry" : MessageLookupByLibrary.simpleMessage("Choose country:"),
+    "currencyConverter" : MessageLookupByLibrary.simpleMessage("Currency converter:"),
+    "currentTime" : MessageLookupByLibrary.simpleMessage("Current time:"),
     "title" : MessageLookupByLibrary.simpleMessage("Country Info Helper")
   };
 }
