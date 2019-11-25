@@ -10,6 +10,14 @@ class CountryInfoState extends State<CountryInfo> {
     return DateFormat.yMMMd(myLocale.languageCode).format(currentDateAndTime);
   }
 
+  String _formatCurrency() {
+    if (widget.exchangeRate == null || widget.exchangeRate == '') return "Could not load currency."; // TODO: Localizar
+    final value = 1;
+    final dest = NumberFormat.simpleCurrency(locale: widget.languageCode, name: widget.currencyCode).format(value);
+    final local = NumberFormat.simpleCurrency(locale: 'pt_br', name: 'BRL').format(num.parse(widget.exchangeRate));
+    return "Today, $dest (${widget.currencyCode}) is equivalent to $local (BRL)."; // TODO: Localizar
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -50,7 +58,7 @@ class CountryInfoState extends State<CountryInfo> {
             Padding(
               padding: EdgeInsets.all(10.0),
               child: Text(
-                "Today, 1 ${widget.country.iso3Code} is equivalent to ${widget.currency} dolars.", // TODO: Localizar
+                _formatCurrency(),
                 style: TextStyle(fontSize: 18.0),
               ),
             )
@@ -66,13 +74,17 @@ class CountryInfo extends StatefulWidget {
   CountryInfoState createState() => CountryInfoState();
 
   final Country country;
-  final String currency;
+  final String currencyCode;
+  final String exchangeRate;
+  final String languageCode;
   final String date;
 
   CountryInfo(
       {Key key,
       @required this.country,
-      @required this.currency,
+      @required this.currencyCode,
+      @required this.exchangeRate,
+      @required this.languageCode,
       @required this.date})
       : super(key: key);
 }

@@ -31,51 +31,68 @@ class App extends StatelessWidget {
 
 class MainPageState extends State<MainPage> {
   Country _selected;
-  String _currency;
+  String _currencyCode;
+  String _exchangeRate;
+  String _languageCode;
   String _date;
 
   Future<String> _getCountryCurrentDate(String countryCode) async {
     NetworkHelper helper =
-        NetworkHelper('https://restcountries.eu/rest/v2/alpha/${countryCode}');
+        NetworkHelper('https://restcountries.eu/rest/v2/alpha/$countryCode');
 
     var countryData = await helper.getData();
     NetworkHelper timezoneHelper = NetworkHelper(
-        'http://api.timezonedb.com/v2.1/list-time-zone?key=API_KEY&format=json&country=${countryData['alpha2Code']}');
+        'http://api.timezonedb.com/v2.1/list-time-zone?key=UIUD51Z4MSII&format=json&country=${countryData['alpha2Code']}');
 
     var availableTimezones = await timezoneHelper.getData();
 
     var timezone = availableTimezones['zones'][0]['zoneName'];
     NetworkHelper dateHelper = NetworkHelper(
-        'http://api.timezonedb.com/v2.1/get-time-zone?key=API_KEY&format=json&by=zone&zone=${timezone}');
+        'http://api.timezonedb.com/v2.1/get-time-zone?key=UIUD51Z4MSII&format=json&by=zone&zone=${timezone}');
     var date = await dateHelper.getData();
 
     if (date != null) {
       return date['formatted'];
     }
+    return '';
   }
 
-  Future<String> _getCountryCurrency(String countryCode) async {
+  // Get iso639_1 language code (first language), exchange rate and ISO 4217 currency code
+  Future<Map> _getCountryData(String countryCode) async {
+    var countryDataMap = new Map();
+    countryDataMap['languageCode'] = null;
+    countryDataMap['currencyCode'] = null;
+    countryDataMap['exchangeRate'] = null;
+
     NetworkHelper helper =
-        NetworkHelper('https://restcountries.eu/rest/v2/alpha/${countryCode}');
+        NetworkHelper('https://restcountries.eu/rest/v2/alpha/$countryCode');
 
     var countryData = await helper.getData();
 
-    var currency = countryData['currencies'][0];
+    if (countryData == null) return countryDataMap;
+
+    final baseCurrencyCode = countryData['currencies'][0]['code'];
+
     NetworkHelper currencyHelper = NetworkHelper(
-        'https://api.exchangeratesapi.io/latest?symbols=USD&base=${currency['code']}');
+        'https://api.exchangeratesapi.io/latest?symbols=BRL&base=$baseCurrencyCode');
 
     var currencyData = await currencyHelper.getData();
 
     if (currencyData != null) {
-      return currencyData['rates']['USD'].toString();
-    }
+      countryDataMap['languageCode'] = countryData['languages'][0]['iso639_1'];
+      countryDataMap['currencyCode'] = baseCurrencyCode;
+      countryDataMap['exchangeRate'] = currencyData['rates']['BRL'].toString();
+    } 
+    return countryDataMap;
   }
 
   Widget _buildCountryPage() {
     if (_selected != null) {
       return CountryInfo(
         country: _selected,
-        currency: _currency,
+        currencyCode: _currencyCode,
+        exchangeRate: _exchangeRate,
+        languageCode: _languageCode,
         date: _date,
       );
     } else {
@@ -94,7 +111,7 @@ class MainPageState extends State<MainPage> {
               width: 8.0,
             ),
             Text(
-                "+${country.phoneCode} ${country.name.split(' ')[0]} (${country.isoCode})"),
+                "${country.name.split(' ')[0]}"),
           ],
         ),
       );
@@ -126,14 +143,17 @@ class MainPageState extends State<MainPage> {
                         initialValue: 'br',
                         itemBuilder: _buildDropdownItem,
                         onValuePicked: ((country) async {
-                          var currency =
-                              await _getCountryCurrency(country.iso3Code);
-                          var date =
-                              await _getCountryCurrentDate(country.iso3Code);
+
+                          final date = await _getCountryCurrentDate(country.iso3Code);
+                          final countryData = await _getCountryData(country.iso3Code);
+
+                          print(countryData);
 
                           setState(() {
                             _selected = country;
-                            _currency = currency;
+                            _currencyCode = countryData['currencyCode'];
+                            _exchangeRate = countryData['exchangeRate'];
+                            _languageCode = countryData['languageCode'];
                             _date = date;
                           });
                         }),
