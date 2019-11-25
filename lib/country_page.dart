@@ -4,10 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class CountryInfoState extends State<CountryInfo> {
-  DateTime now = DateTime.now();
-
   String _formatDate() {
-    return DateFormat('kk:mm:ss \n EEE d MMM').format(now);
+    var currentDateAndTime = DateTime.parse(widget.date);
+    return DateFormat('kk:mm:ss \n d/M/y').format(currentDateAndTime);
   }
 
   @override
