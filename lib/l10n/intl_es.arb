@@ -1,5 +1,5 @@
 {
-  "@@last_modified": "2019-11-24T21:04:50.145406",
+  "@@last_modified": "2019-11-25T16:40:15.480188",
   "title": "Country Info Helper",
   "@title": {
     "description": "App title",
@@ -19,6 +19,25 @@
   },
   "currentTime": "Current time:",
   "@currentTime": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "failedLoadCurrency": "Could not load currency",
+  "@failedLoadCurrency": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "currencyExchange": "Today, {dest} ({currencyCode}) is equivalent to {local} (BRL).",
+  "@currencyExchange": {
+    "type": "text",
+    "placeholders": {
+      "dest": {},
+      "currencyCode": {},
+      "local": {}
+    }
+  },
+  "failedLoadData": "Could not load currency.",
+  "@failedLoadData": {
     "type": "text",
     "placeholders": {}
   }

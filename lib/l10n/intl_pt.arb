@@ -1,5 +1,5 @@
 {
-  "@@last_modified": "2019-11-24T21:04:50.145406",
+  "@@last_modified": "2019-11-25T16:40:15.480188",
   "title": "Auxiliar de Informações do País",
   "@title": {
     "description": "App title",
@@ -12,13 +12,32 @@
     "type": "text",
     "placeholders": {}
   },
-  "currencyConverter": "Conversor de moeda:",
+  "currencyConverter": "Conversor de moedas:",
   "@currencyConverter": {
     "type": "text",
     "placeholders": {}
   },
   "currentTime": "Hora atual:",
   "@currentTime": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "failedLoadCurrency": "Não foi possível carregar a moeda.",
+  "@failedLoadCurrency": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "currencyExchange": "Hoje, {dest} ({currencyCode}) é equivalente a {local} (BRL).",
+  "@currencyExchange": {
+    "type": "text",
+    "placeholders": {
+      "dest": {},
+      "currencyCode": {},
+      "local": {}
+    }
+  },
+  "failedLoadData": "Não foi possível carregar informações sobre o país.",
+  "@failedLoadData": {
     "type": "text",
     "placeholders": {}
   }

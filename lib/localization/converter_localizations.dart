@@ -38,4 +38,17 @@ class ConverterLocalizations {
       );
 
   String get currentTime => Intl.message('Current time:', name: 'currentTime');
+
+  String get failedLoadCurrency =>
+      Intl.message("Could not load currency", name: 'failedLoadCurrency');
+
+  String currencyExchange(String dest, String currencyCode, String local) =>
+      Intl.message(
+          "Today, $dest (${currencyCode}) is equivalent to $local (BRL).",
+          args: [dest, currencyCode, local],
+          name: 'currencyExchange');
+
+  String get failedLoadData =>
+      Intl.message('Could not load data for selected country.',
+          name: 'failedLoadData');
 }

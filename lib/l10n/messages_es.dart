@@ -19,11 +19,16 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'es';
 
+  static m0(dest, currencyCode, local) => "Today, ${dest} (${currencyCode}) is equivalent to ${local} (BRL).";
+
   final messages = _notInlinedMessages(_notInlinedMessages);
   static _notInlinedMessages(_) => <String, Function> {
     "chooseCountry" : MessageLookupByLibrary.simpleMessage("Choose country:"),
     "currencyConverter" : MessageLookupByLibrary.simpleMessage("Currency converter:"),
+    "currencyExchange" : m0,
     "currentTime" : MessageLookupByLibrary.simpleMessage("Current time:"),
+    "failedLoadCurrency" : MessageLookupByLibrary.simpleMessage("Could not load currency"),
+    "failedLoadData" : MessageLookupByLibrary.simpleMessage("Could not load currency."),
     "title" : MessageLookupByLibrary.simpleMessage("Country Info Helper")
   };
 }

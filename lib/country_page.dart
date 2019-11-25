@@ -7,15 +7,24 @@ class CountryInfoState extends State<CountryInfo> {
   String _formatDate() {
     Locale myLocale = Localizations.localeOf(context);
     var currentDateAndTime = DateTime.parse(widget.date);
-    return DateFormat.yMMMd(myLocale.languageCode).format(currentDateAndTime);
+    return DateFormat.Hms(myLocale.languageCode)
+        .add_yMMMd()
+        .format(currentDateAndTime);
   }
 
   String _formatCurrency() {
-    if (widget.exchangeRate == null || widget.exchangeRate == '') return "Could not load currency."; // TODO: Localizar
+    if (widget.exchangeRate == null || widget.exchangeRate == '')
+      return ConverterLocalizations.of(context).failedLoadCurrency;
+
     final value = 1;
-    final dest = NumberFormat.simpleCurrency(locale: widget.languageCode, name: widget.currencyCode).format(value);
-    final local = NumberFormat.simpleCurrency(locale: 'pt_br', name: 'BRL').format(num.parse(widget.exchangeRate));
-    return "Today, $dest (${widget.currencyCode}) is equivalent to $local (BRL)."; // TODO: Localizar
+    final dest = NumberFormat.simpleCurrency(
+            locale: widget.languageCode, name: widget.currencyCode)
+        .format(value);
+    final local = NumberFormat.simpleCurrency(locale: 'pt_br', name: 'BRL')
+        .format(num.parse(widget.exchangeRate));
+
+    return ConverterLocalizations.of(context)
+        .currencyExchange(dest, widget.currencyCode, local);
   }
 
   @override
@@ -43,7 +52,7 @@ class CountryInfoState extends State<CountryInfo> {
                     Padding(
                       padding: EdgeInsets.all(10.0),
                       child: Text(
-                        '${_formatDate()}', // TODO: localizar
+                        '${_formatDate()}',
                         style: TextStyle(fontSize: 18.0),
                       ),
                     ),

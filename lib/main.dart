@@ -82,7 +82,7 @@ class MainPageState extends State<MainPage> {
       countryDataMap['languageCode'] = countryData['languages'][0]['iso639_1'];
       countryDataMap['currencyCode'] = baseCurrencyCode;
       countryDataMap['exchangeRate'] = currencyData['rates']['BRL'].toString();
-    } 
+    }
     return countryDataMap;
   }
 
@@ -97,9 +97,7 @@ class MainPageState extends State<MainPage> {
       );
     } else {
       return Container(
-          child: Text(
-              'Could not load data for selected country.') // TODO: Localizar,
-          );
+          child: Text(ConverterLocalizations.of(context).failedLoadData));
     }
   }
 
@@ -110,8 +108,7 @@ class MainPageState extends State<MainPage> {
             SizedBox(
               width: 8.0,
             ),
-            Text(
-                "${country.name.split(' ')[0]}"),
+            Text("${country.name.split(' ')[0]}"),
           ],
         ),
       );
@@ -138,16 +135,16 @@ class MainPageState extends State<MainPage> {
                       ),
                     ),
                     Padding(
-                      padding: EdgeInsets.all(10.0),
+                      padding: EdgeInsets.symmetric(
+                          horizontal: 70.0, vertical: 10.0),
                       child: CountryPickerDropdown(
                         initialValue: 'br',
                         itemBuilder: _buildDropdownItem,
                         onValuePicked: ((country) async {
-
-                          final date = await _getCountryCurrentDate(country.iso3Code);
-                          final countryData = await _getCountryData(country.iso3Code);
-
-                          print(countryData);
+                          final date =
+                              await _getCountryCurrentDate(country.iso3Code);
+                          final countryData =
+                              await _getCountryData(country.iso3Code);
 
                           setState(() {
                             _selected = country;
