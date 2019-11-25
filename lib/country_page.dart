@@ -67,7 +67,12 @@ class CountryInfo extends StatefulWidget {
 
   final Country country;
   final String currency;
+  final String date;
 
-  CountryInfo({Key key, @required this.country, @required this.currency})
+  CountryInfo(
+      {Key key,
+      @required this.country,
+      @required this.currency,
+      @required this.date})
       : super(key: key);
 }

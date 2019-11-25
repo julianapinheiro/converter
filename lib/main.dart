@@ -32,15 +32,26 @@ class App extends StatelessWidget {
 class MainPageState extends State<MainPage> {
   Country _selected;
   String _currency;
+  String _date;
 
   Future<String> _getCountryCurrentDate(String countryCode) async {
     NetworkHelper helper =
         NetworkHelper('https://restcountries.eu/rest/v2/alpha/${countryCode}');
 
     var countryData = await helper.getData();
-    var timezone = countryData['timezones'][0];
+    NetworkHelper timezoneHelper = NetworkHelper(
+        'http://api.timezonedb.com/v2.1/list-time-zone?key=API_KEY&format=json&country=${countryData['alpha2Code']}');
 
-    // NetworkHelper timeHelper = NetworkHelper();
+    var availableTimezones = await timezoneHelper.getData();
+
+    var timezone = availableTimezones['zones'][0]['zoneName'];
+    NetworkHelper dateHelper = NetworkHelper(
+        'http://api.timezonedb.com/v2.1/get-time-zone?key=API_KEY&format=json&by=zone&zone=${timezone}');
+    var date = await dateHelper.getData();
+
+    if (date != null) {
+      return date['formatted'];
+    }
   }
 
   Future<String> _getCountryCurrency(String countryCode) async {
@@ -65,6 +76,7 @@ class MainPageState extends State<MainPage> {
       return CountryInfo(
         country: _selected,
         currency: _currency,
+        date: _date,
       );
     } else {
       return Container(
@@ -116,10 +128,13 @@ class MainPageState extends State<MainPage> {
                         onValuePicked: ((country) async {
                           var currency =
                               await _getCountryCurrency(country.iso3Code);
+                          var date =
+                              await _getCountryCurrentDate(country.iso3Code);
 
                           setState(() {
                             _selected = country;
                             _currency = currency;
+                            _date = date;
                           });
                         }),
                       ),
