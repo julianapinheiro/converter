@@ -2,7 +2,6 @@ import 'package:converter/localization/converter_localizations.dart';
 import 'package:country_pickers/country.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'network_helper.dart';
 
 class CountryInfoState extends State<CountryInfo> {
   DateTime now = DateTime.now();
@@ -51,7 +50,7 @@ class CountryInfoState extends State<CountryInfo> {
             Padding(
               padding: EdgeInsets.all(10.0),
               child: Text(
-                ConverterLocalizations.of(context).currencyConverter,
+                "Today, 1 ${widget.country.iso3Code} is equivalent to ${widget.currency} dolars.", // TODO: Localizar
                 style: TextStyle(fontSize: 18.0),
               ),
             )

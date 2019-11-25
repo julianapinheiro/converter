@@ -67,7 +67,10 @@ class MainPageState extends State<MainPage> {
         currency: _currency,
       );
     } else {
-      return Container();
+      return Container(
+          child: Text(
+              'Could not load data for selected country.') // TODO: Localizar,
+          );
     }
   }
 
