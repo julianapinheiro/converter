@@ -5,8 +5,9 @@ import 'package:intl/intl.dart';
 
 class CountryInfoState extends State<CountryInfo> {
   String _formatDate() {
+    Locale myLocale = Localizations.localeOf(context);
     var currentDateAndTime = DateTime.parse(widget.date);
-    return DateFormat('kk:mm:ss \n d/M/y').format(currentDateAndTime);
+    return DateFormat.yMMMd(myLocale.languageCode).format(currentDateAndTime);
   }
 
   @override
