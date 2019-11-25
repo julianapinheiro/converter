@@ -31,6 +31,7 @@ class App extends StatelessWidget {
 
 class MainPageState extends State<MainPage> {
   Country _selected;
+  String _currency;
 
   Future<String> _getCountryCurrentDate(String countryCode) async {
     NetworkHelper helper =
@@ -39,7 +40,7 @@ class MainPageState extends State<MainPage> {
     var countryData = await helper.getData();
     var timezone = countryData['timezones'][0];
 
-    NetworkHelper timeHelper = NetworkHelper();
+    // NetworkHelper timeHelper = NetworkHelper();
   }
 
   Future<String> _getCountryCurrency(String countryCode) async {
@@ -53,20 +54,18 @@ class MainPageState extends State<MainPage> {
         'https://api.exchangeratesapi.io/latest?symbols=USD&base=${currency['code']}');
 
     var currencyData = await currencyHelper.getData();
-    return currencyData['rates']['USD'].toString();
+
+    if (currencyData != null) {
+      return currencyData['rates']['USD'].toString();
+    }
   }
 
   Widget _buildCountryPage() {
     if (_selected != null) {
-      _getCountryCurrency(_selected.iso3Code).then((currency) => CountryInfo(
-            country: _selected,
-            currency: currency,
-          ));
-
-      // return CountryInfo(
-      //   country: _selected,
-      //   currency: currency,
-      // );
+      return CountryInfo(
+        country: _selected,
+        currency: _currency,
+      );
     } else {
       return Container();
     }
@@ -111,9 +110,13 @@ class MainPageState extends State<MainPage> {
                       child: CountryPickerDropdown(
                         initialValue: 'br',
                         itemBuilder: _buildDropdownItem,
-                        onValuePicked: ((country) {
+                        onValuePicked: ((country) async {
+                          var currency =
+                              await _getCountryCurrency(country.iso3Code);
+
                           setState(() {
                             _selected = country;
+                            _currency = currency;
                           });
                         }),
                       ),
